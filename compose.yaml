@@ -1,0 +1,23 @@
+version: '3'
+services:
+  postgres:
+    image: 'postgres:latest'
+    container_name: postgres
+    environment:
+      - 'POSTGRES_DB=airline'
+      - 'POSTGRES_PASSWORD=postgres'
+      - 'POSTGRES_USER=postgres'
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  highEndSystem:
+    image: highendsystem:latest
+    container_name: highendsystem
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8181:8181"
+    depends_on:
+      - postgres

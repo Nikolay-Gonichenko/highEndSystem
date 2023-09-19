@@ -1,0 +1,19 @@
+server:
+  port: 8181
+spring:
+  datasource:
+    #url: jdbc:postgresql://localhost:5432/airline
+    url: jdbc:postgresql://postgres:5432/airline
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+  liquibase:
+    change-log: classpath:db/changelog/changelog-master.xml
+    enabled: true
+    drop-first: false
+    default-schema: public
+
