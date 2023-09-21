@@ -8,4 +8,92 @@
         <sqlFile path="sql/create-error_type-table.sql" relativeToChangelogFile="true"/>
     </changeSet>
 
+    <changeSet id="create-errors-table" author="postgres">
+        <sqlFile path="sql/create-errors-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-departments-table" author="postgres">
+        <sqlFile path="sql/create-departments-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-positions-table" author="postgres">
+        <sqlFile path="sql/create-positions-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-planes-table" author="postgres">
+        <sqlFile path="sql/create-planes-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-locations-table" author="postgres">
+        <sqlFile path="sql/create-locations-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-routes-table" author="postgres">
+        <sqlFile path="sql/create-routes-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-flight_status-table" author="postgres">
+        <sqlFile path="sql/create-flight_status-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-flights-table" author="postgres">
+        <sqlFile path="sql/create-flights-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-document_type-table" author="postgres">
+        <sqlFile path="sql/create-document_type-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-documents-table" author="postgres">
+        <sqlFile path="sql/create-documents-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-roles-table" author="postgres">
+        <sqlFile path="sql/create-roles-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-banned_reasons-table" author="postgres">
+        <sqlFile path="sql/create-banned_reasons-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-humans-table" author="postgres">
+        <sqlFile path="sql/create-humans-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-banned_list-table" author="postgres">
+        <sqlFile path="sql/create-banned_list-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-violation_type-table" author="postgres">
+        <sqlFile path="sql/create-violation_type-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-accounts-table" author="postgres">
+        <sqlFile path="sql/create-accounts-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-violations-table" author="postgres">
+        <sqlFile path="sql/create-violations-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-employees-table" author="postgres">
+        <sqlFile path="sql/create-employees-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-option_type-table" author="postgres">
+        <sqlFile path="sql/create-option_type-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-crew-table" author="postgres">
+        <sqlFile path="sql/create-crew-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-tickets-table" author="postgres">
+        <sqlFile path="sql/create-tickets-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-options-table" author="postgres">
+        <sqlFile path="sql/create-options-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
 </databaseChangeLog>

@@ -2,8 +2,8 @@ server:
   port: 8181
 spring:
   datasource:
-    #url: jdbc:postgresql://localhost:5432/airline
-    url: jdbc:postgresql://postgres:5432/airline
+    url: jdbc:postgresql://localhost:5432/airline
+    #url: jdbc:postgresql://postgres:5432/airline
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
