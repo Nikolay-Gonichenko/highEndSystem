@@ -11,4 +11,6 @@ import ru.itmo.highendsystem.model.entity.Account;
 public interface AccountMapper {
 
     FullAccountDto accountToFullDto(Account account);
+
+    Account fullDtoToAccount(FullAccountDto accountD);
 }

@@ -25,4 +25,11 @@ public class AccountServiceImpl implements AccountService {
                 .orElseThrow(() -> new NotFoundEntityByIdException(Account.class, id));
         return accountMapper.accountToFullDto(account);
     }
+
+    @Override
+    public FullAccountDto saveAccount(FullAccountDto account) {
+        return accountMapper.accountToFullDto(
+                accountRepository.save(accountMapper.fullDtoToAccount(account))
+        );
+    }
 }

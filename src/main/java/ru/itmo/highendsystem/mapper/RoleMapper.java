@@ -11,4 +11,6 @@ import ru.itmo.highendsystem.model.entity.Role;
 public interface RoleMapper {
 
     FullRoleDto roleToFullDto(Role role);
+
+    Role fullDtoToRole(FullRoleDto role);
 }

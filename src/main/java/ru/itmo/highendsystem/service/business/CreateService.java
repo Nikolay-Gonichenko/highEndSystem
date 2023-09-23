@@ -1,5 +1,6 @@
 package ru.itmo.highendsystem.service.business;
 
+import ru.itmo.highendsystem.model.dto.partial.ShortAccountDto;
 import ru.itmo.highendsystem.model.dto.partial.ShortEmployeeDto;
 
 /**
@@ -13,4 +14,11 @@ public interface CreateService {
      * @return true если операция завершилась успешно
      */
     boolean createEmployee(ShortEmployeeDto employee);
+
+    /**
+     * Создание аккаунта
+     * @param account дто аккаунта без id
+     * @return иденфикатор аккаунта
+     */
+    Long createAccount(ShortAccountDto account);
 }

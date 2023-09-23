@@ -27,7 +27,7 @@ public class Account {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "human_id", nullable = false)
     private Human human;
 

@@ -33,7 +33,7 @@ public class Human {
     @Column(name = "birth_date", nullable = false)
     private Date birthDate;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "document_id")
     private Document document;
 }

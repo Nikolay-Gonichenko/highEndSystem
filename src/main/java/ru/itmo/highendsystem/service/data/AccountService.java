@@ -14,4 +14,11 @@ public interface AccountService {
      */
     FullAccountDto getAccountById(Long id);
 
+    /**
+     * Сохраняет новый аккаунт
+     * @param account полное дто аккаунта
+     * @return полное дто аккаунта с id
+     */
+    FullAccountDto saveAccount(FullAccountDto account);
+
 }
