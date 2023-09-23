@@ -11,4 +11,6 @@ import ru.itmo.highendsystem.model.entity.Employee;
 public interface EmployeeMapper {
 
     Employee fullDtoToEmployee(FullEmployeeDto employee);
+
+    FullEmployeeDto employeeToFullDto(Employee employee);
 }
