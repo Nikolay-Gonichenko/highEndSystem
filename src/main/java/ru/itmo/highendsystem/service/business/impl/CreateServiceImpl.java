@@ -2,14 +2,14 @@ package ru.itmo.highendsystem.service.business.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.itmo.highendsystem.model.dto.full.FullAccountDto;
-import ru.itmo.highendsystem.model.dto.full.FullEmployeeDto;
-import ru.itmo.highendsystem.model.dto.full.FullPositionDto;
+import org.springframework.transaction.annotation.Transactional;
+import ru.itmo.highendsystem.model.dto.full.*;
+import ru.itmo.highendsystem.model.dto.partial.DocumentDtoWithoutId;
+import ru.itmo.highendsystem.model.dto.partial.HumanDtoWithoutId;
+import ru.itmo.highendsystem.model.dto.partial.ShortAccountDto;
 import ru.itmo.highendsystem.model.dto.partial.ShortEmployeeDto;
 import ru.itmo.highendsystem.service.business.CreateService;
-import ru.itmo.highendsystem.service.data.AccountService;
-import ru.itmo.highendsystem.service.data.EmployeeService;
-import ru.itmo.highendsystem.service.data.PositionService;
+import ru.itmo.highendsystem.service.data.*;
 
 /**
  * Реализация {@link CreateService}
@@ -23,6 +23,10 @@ public class CreateServiceImpl implements CreateService {
     private PositionService positionService;
     @Autowired
     private EmployeeService employeeService;
+    @Autowired
+    private RoleService roleService;
+    @Autowired
+    private DocumentTypeService documentTypeService;
 
 
     @Override
@@ -36,5 +40,53 @@ public class CreateServiceImpl implements CreateService {
         fullEmployeeDto.setPosition(position);
         fullEmployeeDto.setSalary(employee.salary());
         return employeeService.saveEmployee(fullEmployeeDto);
+    }
+
+    @Override
+    @Transactional
+    public Long createAccount(ShortAccountDto account) {
+        FullRoleDto role = roleService.getRoleById(account.getRoleId());
+        FullHumanDto fullHumanDto = createHuman(account.getHuman());
+
+        FullAccountDto fullAccountDto = new FullAccountDto();
+        fullAccountDto.setNickname(account.getNickname());
+        fullAccountDto.setPassword(account.getPassword());
+        fullAccountDto.setHuman(fullHumanDto);
+        fullAccountDto.setBonusMoney(account.getBonusMoney());
+        fullAccountDto.setRegistrationDate(account.getRegistrationDate());
+        fullAccountDto.setViolationCount(0);
+        fullAccountDto.setRole(role);
+
+        return accountService.saveAccount(fullAccountDto).getId();
+    }
+
+    /**
+     * Создание человека в системе
+     * @param humanDtoWithoutId краткое дто человека
+     * @return полное дто человека
+     */
+    private FullHumanDto createHuman(HumanDtoWithoutId humanDtoWithoutId) {
+        FullDocumentDto fullDocumentDto = createDocument(humanDtoWithoutId.getDocument());
+        FullHumanDto fullHumanDto = new FullHumanDto();
+        fullHumanDto.setName(humanDtoWithoutId.getName());
+        fullHumanDto.setSurname(humanDtoWithoutId.getSurname());
+        fullHumanDto.setLastName(humanDtoWithoutId.getLastName());
+        fullHumanDto.setBirthDate(humanDtoWithoutId.getBirthDate());
+        fullHumanDto.setDocument(fullDocumentDto);
+        return fullHumanDto;
+    }
+
+    /**
+     * Создание дто документа
+     * @param document краткое дто документа
+     * @return полное дто документа
+     */
+    private FullDocumentDto createDocument(DocumentDtoWithoutId document) {
+        FullDocumentTypeDto documentType = documentTypeService.getDocumentTypeById(document.getDocumentTypeId());
+        FullDocumentDto fullDocumentDto = new FullDocumentDto();
+        fullDocumentDto.setSeries(document.getSeries());
+        fullDocumentDto.setNumber(document.getNumber());
+        fullDocumentDto.setDocumentType(documentType);
+        return fullDocumentDto;
     }
 }
