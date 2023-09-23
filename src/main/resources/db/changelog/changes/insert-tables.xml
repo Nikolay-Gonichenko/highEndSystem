@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="insert-document_type-table" author="postgres">
+        <sqlFile path="sql/insert-document_type-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="insert-flight_status-table" author="postgres">
+        <sqlFile path="sql/insert-flight_status-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="insert-roles-table" author="postgres">
+        <sqlFile path="sql/insert-roles-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="insert-violation_type-table" author="postgres">
+        <sqlFile path="sql/insert-violation_type-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="insert-option_type-table" author="postgres">
+        <sqlFile path="sql/insert-option_type-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="insert-error_type-table" author="postgres">
+        <sqlFile path="sql/insert-error_type-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+</databaseChangeLog>
