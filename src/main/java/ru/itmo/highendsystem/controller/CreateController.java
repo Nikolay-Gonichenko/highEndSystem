@@ -10,7 +10,7 @@ import ru.itmo.highendsystem.model.dto.partial.ShortEmployeeDto;
 import ru.itmo.highendsystem.service.business.CreateService;
 
 /**
- * Контроллер для работы админа
+ * Контроллер для создания новых объектов
  */
 @RestController
 @RequestMapping("api/v1/airline/create")
@@ -34,7 +34,7 @@ public class CreateController {
     /**
      * Создание нового аккаунта
      * @param account дто аккаунта без id
-     * @return полное дто аккаунта
+     * @return id аккаунта
      */
     @PostMapping("account")
     public ResponseEntity<Long> createNewAccount(ShortAccountDto account) {
