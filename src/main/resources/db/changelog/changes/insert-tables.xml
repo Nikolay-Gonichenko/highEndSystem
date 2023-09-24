@@ -27,4 +27,24 @@
     <changeSet id="insert-error_type-table" author="postgres">
         <sqlFile path="sql/insert-error_type-table.sql" relativeToChangelogFile="true"/>
     </changeSet>
+
+    <changeSet id="insert-banned_reason-table" author="postgres">
+        <sqlFile path="sql/insert-banned_reason-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="insert-planes-table" author="postgres">
+        <sqlFile path="sql/insert-planes-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="insert-locations-table" author="postgres">
+        <sqlFile path="sql/insert-locations-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="insert-departments-table.sql" author="postgres">
+        <sqlFile path="sql/insert-departments-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="insert-positions-table.sql" author="postgres">
+        <sqlFile path="sql/insert-positions-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
 </databaseChangeLog>

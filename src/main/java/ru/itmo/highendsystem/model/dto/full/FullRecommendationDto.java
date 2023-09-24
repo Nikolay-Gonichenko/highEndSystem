@@ -11,4 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FullRecommendationDto {
+    private Long userId;
+    private Integer count;
 }

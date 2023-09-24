@@ -15,20 +15,4 @@ public class FullLocationDto {
     private String country;
     private String city;
     private String airport;
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (obj.getClass() != this.getClass()) {
-            return false;
-        }
-
-        final FullLocationDto other = (FullLocationDto) obj;
-
-        return other.getCity().equals(this.city) &&
-                other.getCountry().equals(this.country) &&
-                other.getAirport().equals(this.airport);
-    }
 }

@@ -3,6 +3,7 @@ package ru.itmo.highendsystem.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.itmo.highendsystem.model.dto.full.FullFlightDto;
@@ -23,7 +24,7 @@ public class FlightsController {
     private FlightService flightService;
 
     @PostMapping("all")
-    public ResponseEntity<List<FullFlightDto>> getFlights(FullFlightSearchDto search) {
+    public ResponseEntity<List<FullFlightDto>> getFlights(@RequestBody FullFlightSearchDto search) {
         List<FullFlightDto> flights = flightService.getAllFlights();
         Stream<FullFlightDto> sorted = flights.stream()
                 .filter(x -> x.getRoute().getFromLocation().equals(search.getFromLocation()) &&

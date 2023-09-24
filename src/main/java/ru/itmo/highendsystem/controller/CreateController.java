@@ -3,6 +3,7 @@ package ru.itmo.highendsystem.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.itmo.highendsystem.model.dto.partial.ShortAccountDto;
@@ -27,7 +28,7 @@ public class CreateController {
      * @return true если операция прошла успешно
      */
     @PostMapping("employee")
-    public ResponseEntity<Boolean> createNewEmployee(ShortEmployeeDto employee) {
+    public ResponseEntity<Boolean> createNewEmployee(@RequestBody ShortEmployeeDto employee) {
         return ResponseEntity.ok(createService.createEmployee(employee));
     }
 
@@ -37,7 +38,7 @@ public class CreateController {
      * @return id аккаунта
      */
     @PostMapping("account")
-    public ResponseEntity<Long> createNewAccount(ShortAccountDto account) {
+    public ResponseEntity<Long> createNewAccount(@RequestBody ShortAccountDto account) {
         return ResponseEntity.ok(createService.createAccount(account));
     }
 }

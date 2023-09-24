@@ -3,6 +3,7 @@ package ru.itmo.highendsystem.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.itmo.highendsystem.model.dto.partial.ShortBannedListDto;
@@ -25,7 +26,7 @@ public class ViolationOperationController {
      * @return обновлённое число нарушений у пользователя
      */
     @PostMapping("add")
-    public ResponseEntity<Integer> addViolation(ShortViolationDto violationDto) {
+    public ResponseEntity<Integer> addViolation(@RequestBody ShortViolationDto violationDto) {
         return ResponseEntity.ok(violationOperationService.addViolation(violationDto));
     }
 
@@ -35,7 +36,7 @@ public class ViolationOperationController {
      * @return true если операция завершилась успешно
      */
     @PostMapping("ban")
-    public ResponseEntity<Boolean> ban(ShortBannedListDto shortBannedListDto) {
-        return ResponseEntity.ok(true);
+    public ResponseEntity<Boolean> ban(@RequestBody ShortBannedListDto shortBannedListDto) {
+        return ResponseEntity.ok(violationOperationService.ban(shortBannedListDto));
     }
 }
