@@ -16,4 +16,6 @@ spring:
     enabled: true
     drop-first: false
     default-schema: public
+jwt:
+  secret: itmo
 

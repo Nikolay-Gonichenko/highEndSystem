@@ -1,6 +1,7 @@
 package ru.itmo.highendsystem.service.business.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.itmo.highendsystem.model.dto.full.*;
@@ -27,7 +28,8 @@ public class CreateServiceImpl implements CreateService {
     private RoleService roleService;
     @Autowired
     private DocumentTypeService documentTypeService;
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public boolean createEmployee(ShortEmployeeDto employee) {
@@ -50,7 +52,7 @@ public class CreateServiceImpl implements CreateService {
 
         FullAccountDto fullAccountDto = new FullAccountDto();
         fullAccountDto.setNickname(account.getNickname());
-        fullAccountDto.setPassword(account.getPassword());
+        fullAccountDto.setPassword(passwordEncoder.encode(account.getPassword()));
         fullAccountDto.setHuman(fullHumanDto);
         fullAccountDto.setBonusMoney(account.getBonusMoney());
         fullAccountDto.setRegistrationDate(account.getRegistrationDate());

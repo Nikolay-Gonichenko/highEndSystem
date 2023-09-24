@@ -21,4 +21,12 @@ public interface AccountService {
      */
     FullAccountDto saveAccount(FullAccountDto account);
 
+    /**
+     * Проверяет существование аккаунта
+     * @param login логин
+     * @param password пароль
+     * @return true если такой аккаунт есть
+     */
+    boolean isExistAccountByNicknameAndPassword(String login, String password);
+
 }

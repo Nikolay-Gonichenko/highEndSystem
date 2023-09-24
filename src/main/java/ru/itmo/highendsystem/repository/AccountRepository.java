@@ -9,4 +9,8 @@ import ru.itmo.highendsystem.model.entity.Account;
  */
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
+
+    Account getAccountByNickname(String nickname);
+
+    Account getAccountByNicknameAndPassword(String nickname, String password);
 }
