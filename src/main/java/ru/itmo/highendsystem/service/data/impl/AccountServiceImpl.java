@@ -32,4 +32,9 @@ public class AccountServiceImpl implements AccountService {
                 accountRepository.save(accountMapper.fullDtoToAccount(account))
         );
     }
+
+    @Override
+    public boolean isExistAccountByNicknameAndPassword(String login, String password) {
+        return accountRepository.getAccountByNicknameAndPassword(login, password) != null;
+    }
 }
