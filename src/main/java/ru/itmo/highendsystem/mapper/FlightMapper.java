@@ -10,4 +10,6 @@ import ru.itmo.highendsystem.model.entity.Flight;
 @Mapper(componentModel = "spring")
 public interface FlightMapper {
     FullFlightDto flightToFullDto(Flight flight);
+
+    Flight fullDtoToFlight(FullFlightDto flightDto);
 }

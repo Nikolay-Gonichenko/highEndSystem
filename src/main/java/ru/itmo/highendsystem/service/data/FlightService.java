@@ -21,4 +21,6 @@ public interface FlightService {
      * @return список дто полетов
      */
     List<FullFlightDto> getAllFlights();
+
+    FullFlightDto saveFlight(FullFlightDto flight);
 }

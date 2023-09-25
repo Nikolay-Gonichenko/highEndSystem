@@ -34,4 +34,11 @@ public class FlightServiceImpl implements FlightService {
         List<Flight> flights = flightRepository.findAll();
         return flights.stream().map(x -> flightMapper.flightToFullDto(x)).collect(Collectors.toList());
     }
+
+    @Override
+    public FullFlightDto saveFlight(FullFlightDto flight) {
+        return flightMapper.flightToFullDto(
+                flightRepository.save(flightMapper.fullDtoToFlight(flight))
+        );
+    }
 }
