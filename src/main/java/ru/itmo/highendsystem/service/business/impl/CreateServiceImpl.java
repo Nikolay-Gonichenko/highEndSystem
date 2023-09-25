@@ -5,10 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.itmo.highendsystem.model.dto.full.*;
-import ru.itmo.highendsystem.model.dto.partial.DocumentDtoWithoutId;
-import ru.itmo.highendsystem.model.dto.partial.HumanDtoWithoutId;
-import ru.itmo.highendsystem.model.dto.partial.ShortAccountDto;
-import ru.itmo.highendsystem.model.dto.partial.ShortEmployeeDto;
+import ru.itmo.highendsystem.model.dto.partial.*;
 import ru.itmo.highendsystem.service.business.CreateService;
 import ru.itmo.highendsystem.service.data.*;
 
@@ -30,6 +27,16 @@ public class CreateServiceImpl implements CreateService {
     private DocumentTypeService documentTypeService;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private FlightService flightService;
+    @Autowired
+    private FlightStatusService flightStatusService;
+    @Autowired
+    private  PlaneService planeService;
+    @Autowired
+    private RouteService routeService;
+    @Autowired
+    private TicketService ticketService;
 
     @Override
     public boolean createEmployee(ShortEmployeeDto employee) {
@@ -60,6 +67,39 @@ public class CreateServiceImpl implements CreateService {
         fullAccountDto.setRole(role);
 
         return accountService.saveAccount(fullAccountDto).getId();
+    }
+
+    @Override
+    public Long createFlight(ShortFlightDto flight) {
+        FullFlightDto flightDto = new FullFlightDto();
+        FullFlightStatusDto flightStatus = flightStatusService.getFlightStatusById(flight.flightStatus());
+        FullPlaneDto plane = planeService.getPlaneById(flight.plane());
+        FullRouteDto route = routeService.getRouteById(flight.route());
+        flightDto.setDateStart(flight.dateStart());
+        flightDto.setDateFinish(flight.dateFinish());
+        flightDto.setFlightStatus(flightStatus);
+        flightDto.setPlane(plane);
+        flightDto.setRoute(route);
+
+        Long id = flightService.saveFlight(flightDto).getId();
+
+        char[] places = new char[] {'A', 'B', 'C', 'D', 'E', 'F'};
+        for (int i = 0; i < plane.getPassengerCount(); i++) {
+            String placeName = Integer.toString(i) + places[i % places.length];
+            ShortTicketDto ticketDto = new ShortTicketDto(id, 0, placeName);
+            createTicket(ticketDto);
+        }
+
+        return id;
+    }
+
+    private Long createTicket(ShortTicketDto ticket) {
+        FullTicketDto ticketDto = new FullTicketDto();
+        ticketDto.setFlight(flightService.getFlightById(ticket.flight()));
+        ticketDto.setCost(ticket.cost());
+        ticketDto.setPlace(ticket.place());
+
+        return ticketService.saveTicket(ticketDto).getId();
     }
 
     /**

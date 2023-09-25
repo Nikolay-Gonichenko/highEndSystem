@@ -19,7 +19,7 @@ public class RecommendationServiceImpl implements RecommendationService {
 
     @Override
     public List<FullRouteDto> getRecommendationsToUser(long id, int count) {
-        List<FullRouteDto> userRoutes = ticketService.getAllTicketByUserId(id)
+        List<FullRouteDto> userRoutes = ticketService.getAllTicketsByUserId(id)
                 .stream()
                 .map(FullTicketDto::getFlight)
                 .map(FullFlightDto::getRoute)

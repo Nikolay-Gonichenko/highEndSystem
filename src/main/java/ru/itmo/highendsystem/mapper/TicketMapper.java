@@ -8,4 +8,6 @@ import ru.itmo.highendsystem.model.entity.Ticket;
 public interface TicketMapper {
 
     FullTicketDto ticketToFullDto(Ticket ticket);
+
+    Ticket fullDtoToTicket(FullTicketDto ticketDto);
 }

@@ -2,6 +2,7 @@ package ru.itmo.highendsystem.service.business;
 
 import ru.itmo.highendsystem.model.dto.partial.ShortAccountDto;
 import ru.itmo.highendsystem.model.dto.partial.ShortEmployeeDto;
+import ru.itmo.highendsystem.model.dto.partial.ShortFlightDto;
 
 /**
  * Сервис по созданию различных сущностей
@@ -21,4 +22,11 @@ public interface CreateService {
      * @return иденфикатор аккаунта
      */
     Long createAccount(ShortAccountDto account);
+
+    /**
+     * Создание полёта
+     * @param flight дто полёта с id параметров
+     * @return идентификатор полёта
+     */
+    Long createFlight(ShortFlightDto flight);
 }
