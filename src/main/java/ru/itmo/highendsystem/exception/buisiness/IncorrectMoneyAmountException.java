@@ -23,4 +23,9 @@ public class IncorrectMoneyAmountException extends BaseException {
     public Integer getUserMoney() {
         return userMoney;
     }
+
+    @Override
+    public String getDescription() {
+        return "Переведна неверная сумма. Переведно " + userMoney + ". Требуется " + ticketCost;
+    }
 }

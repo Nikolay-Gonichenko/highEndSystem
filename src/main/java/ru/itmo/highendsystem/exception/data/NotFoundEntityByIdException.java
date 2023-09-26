@@ -19,4 +19,9 @@ public class NotFoundEntityByIdException extends BaseException {
         this.clazz = clazz;
         this.id = id;
     }
+
+    @Override
+    public String getDescription() {
+        return "Не найден объект класса " + clazz.getSimpleName() + "с id=" + id;
+    }
 }

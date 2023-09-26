@@ -15,4 +15,6 @@ public abstract class BaseException extends RuntimeException {
     public ExceptionType getType() {
         return type;
     }
+
+    public abstract String getDescription();
 }

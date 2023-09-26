@@ -18,4 +18,9 @@ public class WrongCredentialsException extends BaseException {
     public AccountDtoForLogin getAccountDtoForLogin() {
         return accountDtoForLogin;
     }
+
+    @Override
+    public String getDescription() {
+        return "Не существует аккаунта с логином " + accountDtoForLogin.getNickname() + " и паролем " + accountDtoForLogin.getPassword();
+    }
 }

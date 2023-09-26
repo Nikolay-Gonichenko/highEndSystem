@@ -25,4 +25,9 @@ public class NotFoundEmptyTicketForPlaceException extends BaseException {
     public String getPlace() {
         return place;
     }
+
+    @Override
+    public String getDescription() {
+        return "Не найдено свободное место " + place + " на рейсе " + flightId;
+    }
 }

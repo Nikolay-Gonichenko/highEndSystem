@@ -12,4 +12,10 @@ public class FlightIsNotInPreparedStatusException extends BaseException {
     public FlightIsNotInPreparedStatusException() {
         super(ExceptionType.BUSINESS_MANAGER);
     }
+
+
+    @Override
+    public String getDescription() {
+        return "Самолёт уже подготовлен. Добавление новых работников недоступно";
+    }
 }
