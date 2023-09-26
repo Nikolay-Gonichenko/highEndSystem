@@ -14,8 +14,8 @@ public class JwtTokenUtil {
      */
     private static final int EXPIRE_DURATION = 60*60*1000;
 
-    @Value("$(jwt.secret:itmo)")
-    private static String jwtSecret;
+    @Value("$(jwt:secret)")
+    private static String jwtSecret = "itmo";
 
     public static String generateAccessToken(String login) {
         Date date = Date.from(LocalDate.now().plusDays(15).atStartOfDay(ZoneId.systemDefault()).toInstant());

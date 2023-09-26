@@ -1,12 +1,10 @@
 package ru.itmo.highendsystem.service.business.impl;
 
-import io.jsonwebtoken.JwtBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.itmo.highendsystem.exception.buisiness.WrongCredentialsException;
 import ru.itmo.highendsystem.model.dto.partial.AccountDtoForLogin;
-import ru.itmo.highendsystem.model.entity.Account;
 import ru.itmo.highendsystem.secuity.util.JwtTokenUtil;
 import ru.itmo.highendsystem.service.business.LoginService;
 import ru.itmo.highendsystem.service.data.AccountService;

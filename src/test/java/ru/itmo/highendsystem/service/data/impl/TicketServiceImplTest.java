@@ -50,8 +50,7 @@ public class TicketServiceImplTest {
         List<Ticket> allTickets = List.of(ticket1,ticket2);
         when(ticketRepository.findAll()).thenReturn(allTickets);
         when(ticketMapper.ticketToFullDto(ticket1)).thenReturn(fullTicketDto1);
-
-        List<FullTicketDto> expectedResult = ticketService.getAllTicketByUserId(user1Id);
+        List<FullTicketDto> expectedResult = ticketService.getAllTicketsByUserId(user1Id);
         assertEquals(expectedResult.size(), 1);
         assertEquals(expectedResult.get(0).getHuman().getId(), user1Id);
     }

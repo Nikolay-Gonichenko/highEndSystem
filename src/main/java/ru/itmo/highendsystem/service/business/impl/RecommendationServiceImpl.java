@@ -10,6 +10,7 @@ import ru.itmo.highendsystem.service.business.RecommendationService;
 import ru.itmo.highendsystem.service.data.TicketService;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class RecommendationServiceImpl implements RecommendationService {
@@ -26,46 +27,29 @@ public class RecommendationServiceImpl implements RecommendationService {
                 .toList();
 
         if (userRoutes.size() >= count) {
-            Map<String, Integer> freq = new HashMap<>();
+            Map<FullRouteDto, Integer> freq = new HashMap<>();
             for (FullRouteDto userRoute : userRoutes) {
-                String currentKey = userRoute.getFromLocation().getCountry();
-                currentKey += " " + userRoute.getFromLocation().getCity();
-                currentKey += " " + userRoute.getToLocation().getCountry();
-                currentKey += " " + userRoute.getToLocation().getCity();
 
-                if (freq.containsKey(currentKey)) {
-                    freq.put(currentKey, freq.get(currentKey) + 1);
+                if (freq.containsKey(userRoute)) {
+                    freq.put(userRoute, freq.get(userRoute) + 1);
                 } else {
-                    freq.put(currentKey, 1);
+                    freq.put(userRoute, 1);
                 }
             }
-            List<Map.Entry<String, Integer>> temp = new LinkedList<>(freq.entrySet());
-            temp.sort(Map.Entry.comparingByValue());
+            List<Map.Entry<FullRouteDto, Integer>> result = new ArrayList<>(freq.entrySet());
+            result.sort(new Comparator<Map.Entry<FullRouteDto, Integer>>() {
+                @Override
+                public int compare(Map.Entry<FullRouteDto, Integer> o1, Map.Entry<FullRouteDto, Integer> o2) {
+                    return o1.getValue() > o2.getValue() ? 1 : 0;
+                }
+            });
 
-            List<FullRouteDto> result = new LinkedList<>();
-            int max = Math.min(temp.size(), count);
-            for (int i = 0; i < max; i++) {
-                String[] fields = temp.get(i).getKey().split(" ");
-                FullLocationDto from = new FullLocationDto();
-                from.setId((long) i);
-                from.setCountry(fields[0]);
-                from.setCity(fields[1]);
-
-                FullLocationDto to = new FullLocationDto();
-                to.setId((long)(i + max));
-                to.setCountry(fields[2]);
-                to.setCity(fields[3]);
-
-                FullRouteDto newRoute = new FullRouteDto();
-                newRoute.setId((long) i);
-                newRoute.setFromLocation(from);
-                newRoute.setToLocation(to);
-
-                result.add(newRoute);
-            }
-            return result;
+            return result.stream()
+                    .map(Map.Entry::getKey)
+                    .collect(Collectors.toList())
+                    .subList(0, count);
         }
 
-        return new LinkedList<FullRouteDto>();
+        return new ArrayList<>();
     }
 }
