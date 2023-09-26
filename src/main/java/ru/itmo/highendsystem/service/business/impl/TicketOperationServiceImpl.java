@@ -2,6 +2,8 @@ package ru.itmo.highendsystem.service.business.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.itmo.highendsystem.exception.buisiness.IncorrectMoneyAmountException;
+import ru.itmo.highendsystem.exception.buisiness.NotFoundEmptyTicketForPlaceException;
 import ru.itmo.highendsystem.exception.data.NotFoundEntityByIdException;
 import ru.itmo.highendsystem.model.dto.full.FullTicketDto;
 import ru.itmo.highendsystem.model.dto.partial.ShortTicketDto;
@@ -20,19 +22,19 @@ import java.util.Objects;
 public class TicketOperationServiceImpl implements TicketOperationService {
 
     @Autowired
-    TicketService ticketService;
+    private TicketService ticketService;
     @Autowired
-    HumanService humanService;
+    private HumanService humanService;
 
     @Override
-    public Long buyTicket(Long humanId, ShortTicketDto ticket) throws Exception {
+    public Long buyTicket(Long humanId, ShortTicketDto ticket) {
         FullTicketDto ticketDto = ticketService.getAllTicketsByFlightId(ticket.flight())
                 .stream()
                 .filter(x -> x.getHuman() == null && Objects.equals(x.getPlace(), ticket.place()))
                 .findFirst()
-                .orElseThrow(() -> new NotFoundEntityByIdException(Ticket.class, humanId));
+                .orElseThrow(() -> new NotFoundEmptyTicketForPlaceException(ticket.flight(), ticket.place()));
         if (ticket.cost() != ticketDto.getCost()) {
-            throw new Exception("Неверное количество денег");
+            throw new IncorrectMoneyAmountException(ticketDto.getCost(), ticket.cost());
         }
         ticketDto.setHuman(humanService.getHumanById(humanId));
         return ticketService.saveTicket(ticketDto).getId();

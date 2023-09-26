@@ -13,7 +13,7 @@ public interface TicketOperationService {
      * @param ticket краткое дто билета с данными пользоателя
      * @return идентификатор купленного билета
      */
-    Long buyTicket(Long humanId, ShortTicketDto ticket) throws Exception;
+    Long buyTicket(Long humanId, ShortTicketDto ticket);
 
     /**
      * Назначение цены билетам на полет
