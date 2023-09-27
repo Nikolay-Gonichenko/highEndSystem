@@ -34,6 +34,7 @@ public class TicketServiceImpl implements TicketService {
     public List<FullTicketDto> getAllTicketsByUserId(Long id) {
         List<Ticket> tickets = ticketRepository.findAllByHumanId(id);
         return tickets.stream()
+                .filter(x -> x.getHuman() != null && Objects.equals(x.getHuman().getId(), id))
                 .map(x -> ticketMapper.ticketToFullDto(x)).toList();
     }
 

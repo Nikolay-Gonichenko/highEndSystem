@@ -1,4 +1,4 @@
-package ru.itmo.highendsystem.model.dto.full;
+package ru.itmo.highendsystem.model.dto.partial;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,9 +12,9 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FullFlightSearchDto {
-    private FullLocationDto fromLocation;
-    private FullLocationDto toLocation;
-    private Date Start;
+public class FlightSearchDto {
+    private Long fromLocation;
+    private Long toLocation;
+    private Date Start = null;
     private boolean isNeedBack;
 }

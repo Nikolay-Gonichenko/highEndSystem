@@ -84,8 +84,8 @@ public class CreateServiceImpl implements CreateService {
         Long id = flightService.saveFlight(flightDto).getId();
 
         char[] places = new char[] {'A', 'B', 'C', 'D', 'E', 'F'};
-        for (int i = 0; i < plane.getPassengerCount(); i++) {
-            String placeName = Integer.toString(i) + places[i % places.length];
+        for (int i = 1; i < plane.getPassengerCount() + 1; i++) {
+            String placeName = Integer.toString(i) + places[(i - 1) % places.length];
             ShortTicketDto ticketDto = new ShortTicketDto(id, 0, placeName);
             createTicket(ticketDto);
         }

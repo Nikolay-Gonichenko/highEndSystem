@@ -3,8 +3,11 @@ package ru.itmo.highendsystem.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.itmo.highendsystem.model.dto.partial.BuyingTicketDto;
+import ru.itmo.highendsystem.model.dto.partial.SettingCostDto;
 import ru.itmo.highendsystem.model.dto.partial.ShortTicketDto;
 import ru.itmo.highendsystem.service.business.TicketOperationService;
 
@@ -16,12 +19,12 @@ public class TicketController {
     TicketOperationService ticketOperationService;
 
     @PostMapping("buy")
-    public ResponseEntity<Long> buyTicket(Long humanId, ShortTicketDto ticket) {
-        return ResponseEntity.ok(ticketOperationService.buyTicket(humanId, ticket));
+    public ResponseEntity<Long> buyTicket(@RequestBody BuyingTicketDto buyingDto) {
+        return ResponseEntity.ok(ticketOperationService.buyTicket(buyingDto.humanId(), buyingDto.ticketDto()));
     }
 
     @PostMapping("cost")
-    public ResponseEntity<Integer> setCostOnTickets(Long flightId, Integer cost) {
-        return ResponseEntity.ok(ticketOperationService.setCostOnTickets(flightId, cost));
+    public ResponseEntity<Integer> setCostOnTickets(@RequestBody SettingCostDto costDto) {
+        return ResponseEntity.ok(ticketOperationService.setCostOnTickets(costDto.flightId(), costDto.cost()));
     }
 }

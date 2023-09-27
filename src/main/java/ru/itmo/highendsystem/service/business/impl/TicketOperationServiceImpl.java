@@ -12,6 +12,7 @@ import ru.itmo.highendsystem.service.business.TicketOperationService;
 import ru.itmo.highendsystem.service.data.HumanService;
 import ru.itmo.highendsystem.service.data.TicketService;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -43,9 +44,11 @@ public class TicketOperationServiceImpl implements TicketOperationService {
     @Override
     public Integer setCostOnTickets(Long flightId, Integer cost) {
         List<FullTicketDto> flightTickets = ticketService.getAllTicketsByFlightId(flightId);
-        for (FullTicketDto flightTicket : flightTickets) {
-            flightTicket.setCost(cost);
+        List<FullTicketDto> newTickets = new LinkedList<>();
+        for (FullTicketDto current : flightTickets) {
+            current.setCost(cost);
+            newTickets.add(current);
         }
-        return ticketService.saveAllTickets(flightTickets);
+        return ticketService.saveAllTickets(newTickets);
     }
 }

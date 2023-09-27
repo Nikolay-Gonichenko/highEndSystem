@@ -24,7 +24,7 @@ public class Ticket {
     private Flight flight;
 
     @ManyToOne
-    @JoinColumn(name = "human_id", nullable = false)
+    @JoinColumn(name = "human_id")
     private Human human;
 
     @Column(name = "cost", nullable = false)

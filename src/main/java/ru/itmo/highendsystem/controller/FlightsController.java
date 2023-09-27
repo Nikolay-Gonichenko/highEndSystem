@@ -4,12 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.itmo.highendsystem.model.dto.full.FullFlightDto;
-import ru.itmo.highendsystem.model.dto.full.FullFlightSearchDto;
+import ru.itmo.highendsystem.model.dto.partial.FlightSearchDto;
 import ru.itmo.highendsystem.service.business.FlightSearchService;
-import ru.itmo.highendsystem.service.data.FlightService;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * Контроллер для работы с полетами
@@ -22,7 +20,7 @@ public class FlightsController {
     private FlightSearchService flightSearchService;
 
     @PostMapping("all")
-    public ResponseEntity<List<FullFlightDto>> getFlights(@RequestBody FullFlightSearchDto search) {
+    public ResponseEntity<List<FullFlightDto>> getFlights(@RequestBody FlightSearchDto search) {
         return ResponseEntity.ok(flightSearchService.getFlightsByFilters(search));
     }
 }

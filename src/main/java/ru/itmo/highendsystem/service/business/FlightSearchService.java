@@ -1,7 +1,7 @@
 package ru.itmo.highendsystem.service.business;
 
 import ru.itmo.highendsystem.model.dto.full.FullFlightDto;
-import ru.itmo.highendsystem.model.dto.full.FullFlightSearchDto;
+import ru.itmo.highendsystem.model.dto.partial.FlightSearchDto;
 
 import java.util.List;
 
@@ -15,5 +15,5 @@ public interface FlightSearchService {
      * @param search дто фильтров поиска
      * @return список полетов удовлетворяющих фильтрам
      */
-    List<FullFlightDto> getFlightsByFilters(FullFlightSearchDto search);
+    List<FullFlightDto> getFlightsByFilters(FlightSearchDto search);
 }
