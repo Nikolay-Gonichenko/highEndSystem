@@ -1,6 +1,7 @@
 package ru.itmo.highendsystem.service.data.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.itmo.highendsystem.exception.data.NotFoundEntityByIdException;
 import ru.itmo.highendsystem.mapper.FlightMapper;
@@ -30,8 +31,8 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public List<FullFlightDto> getAllFlights() {
-        List<Flight> flights = flightRepository.findAll();
+    public List<FullFlightDto> getAllFlights(Integer offset, Integer limit) {
+        List<Flight> flights = flightRepository.findAll(PageRequest.of(offset, limit)).stream().toList();
         return flights.stream().map(x -> flightMapper.flightToFullDto(x)).collect(Collectors.toList());
     }
 
