@@ -37,4 +37,10 @@ public class AccountServiceImpl implements AccountService {
     public boolean isExistAccountByNicknameAndPassword(String login, String password) {
         return accountRepository.getAccountByNicknameAndPassword(login, password) != null;
     }
+
+    @Override
+    public FullAccountDto getAccountByNickname(String nickname) {
+        Account account = accountRepository.getAccountByNickname(nickname);
+        return accountMapper.accountToFullDto(account);
+    }
 }

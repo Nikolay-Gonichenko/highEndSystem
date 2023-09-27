@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.itmo.highendsystem.exception.buisiness.WrongCredentialsException;
+import ru.itmo.highendsystem.model.dto.full.FullAccountDto;
 import ru.itmo.highendsystem.model.dto.partial.AccountDtoForLogin;
 import ru.itmo.highendsystem.secuity.util.JwtTokenUtil;
 import ru.itmo.highendsystem.service.business.LoginService;
@@ -23,9 +24,8 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public String login(AccountDtoForLogin accountDtoForLogin) {
-        if (!accountService.isExistAccountByNicknameAndPassword(
-                accountDtoForLogin.getNickname(),
-                passwordEncoder.encode(accountDtoForLogin.getPassword())))
+        FullAccountDto fullAccountDto = accountService.getAccountByNickname(accountDtoForLogin.getNickname());
+       if (fullAccountDto == null || !passwordEncoder.matches(accountDtoForLogin.getPassword(), fullAccountDto.getPassword()))
             throw new WrongCredentialsException(accountDtoForLogin);
         return JwtTokenUtil.generateAccessToken(accountDtoForLogin.getNickname());
     }
