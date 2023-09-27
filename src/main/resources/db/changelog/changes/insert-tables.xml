@@ -47,4 +47,8 @@
     <changeSet id="insert-positions-table.sql" author="postgres">
         <sqlFile path="sql/insert-positions-table.sql" relativeToChangelogFile="true"/>
     </changeSet>
+
+    <changeSet id="insert-init-tables.sql" author="postgres">
+        <sqlFile path="sql/insert-init-tables.sql" relativeToChangelogFile="true"/>
+    </changeSet>
 </databaseChangeLog>
