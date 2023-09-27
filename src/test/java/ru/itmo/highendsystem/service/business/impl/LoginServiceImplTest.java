@@ -4,10 +4,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.itmo.highendsystem.exception.buisiness.WrongCredentialsException;
+import ru.itmo.highendsystem.model.dto.full.FullAccountDto;
 import ru.itmo.highendsystem.model.dto.partial.AccountDtoForLogin;
+import ru.itmo.highendsystem.secuity.util.JwtTokenUtil;
 import ru.itmo.highendsystem.service.data.AccountService;
 
 
@@ -20,6 +23,8 @@ public class LoginServiceImplTest {
     private AccountService accountService;
     @Mock
     private PasswordEncoder passwordEncoder;
+    @Mock
+    private JwtTokenUtil jwtTokenUtil;
 
     @InjectMocks
     private LoginServiceImpl loginService;
@@ -29,10 +34,13 @@ public class LoginServiceImplTest {
         String login = "login";
         String password = "pass";
         AccountDtoForLogin accountDtoForLogin = new AccountDtoForLogin(login, password);
-        when(passwordEncoder.encode(password))
-                .thenReturn(password);
-        when(accountService.isExistAccountByNicknameAndPassword(login, password))
-                .thenReturn(true);
+        FullAccountDto fullAccountDto = new FullAccountDto();
+        fullAccountDto.setNickname(login);
+        fullAccountDto.setPassword(password);
+        when(accountService.getAccountByNickname(login))
+                .thenReturn(fullAccountDto);
+        when(passwordEncoder.matches(password, password)).thenReturn(true);
+        when(jwtTokenUtil.generateAccessToken(login)).thenReturn("token");
         assertNotNull(loginService.login(accountDtoForLogin));
     }
 
@@ -41,10 +49,8 @@ public class LoginServiceImplTest {
         String login = "login";
         String password = "pass";
         AccountDtoForLogin accountDtoForLogin = new AccountDtoForLogin(login, password);
-        when(passwordEncoder.encode(password))
-                .thenReturn(password);
-        when(accountService.isExistAccountByNicknameAndPassword(login, password))
-                .thenReturn(false);
+        when(accountService.getAccountByNickname(login))
+                .thenReturn(null);
         assertThrows(WrongCredentialsException.class, () -> loginService.login(accountDtoForLogin));
     }
 }

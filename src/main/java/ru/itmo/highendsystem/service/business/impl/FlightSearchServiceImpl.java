@@ -1,6 +1,7 @@
 package ru.itmo.highendsystem.service.business.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.itmo.highendsystem.model.dto.full.FullFlightDto;
 import ru.itmo.highendsystem.model.dto.full.FullFlightSearchDto;
@@ -20,18 +21,19 @@ public class FlightSearchServiceImpl implements FlightSearchService {
     @Autowired
     private FlightService flightService;
 
-    private final int maxPageSize = 50;
+    @Value("{pagination:maxSize}")
+    private String maxPageSize;
 
     @Override
     public List<FullFlightDto> getFlightsByFilters(FullFlightSearchDto search) {
-
+        int maxPage = Integer.parseInt(maxPageSize);
         List<FullFlightDto> flights = new ArrayList<>();
         int pageNumber = 0;
         do {
-            List<FullFlightDto> fullFlightDtos = flightService.getAllFlights(pageNumber, maxPageSize);
+            List<FullFlightDto> fullFlightDtos = flightService.getAllFlights(pageNumber, maxPage);
             flights.addAll(fullFlightDtos);
             pageNumber++;
-        } while (flights.size() % maxPageSize == 0);
+        } while (flights.size() % maxPage == 0);
 
         Stream<FullFlightDto> sorted = flights.stream()
                 .filter(x -> x.getRoute().getFromLocation().equals(search.getFromLocation()) &&

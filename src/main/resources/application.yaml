@@ -17,5 +17,7 @@ spring:
     drop-first: false
     default-schema: public
 jwt:
-  secret: itmo
+  secret: ${JWT_SECRET}
+pagination:
+  maxSize: ${PAGINATION_MAX_SIZE}
 
