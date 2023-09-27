@@ -29,4 +29,10 @@ public interface AccountService {
      */
     boolean isExistAccountByNicknameAndPassword(String login, String password);
 
+    /**
+     * Получает аккаунт по никнейму
+     * @param nickname никнейм
+     * @return никнейм
+     */
+    FullAccountDto getAccountByNickname(String nickname);
 }

@@ -3,7 +3,6 @@ package ru.itmo.highendsystem.secuity.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -46,9 +45,9 @@ public class SecurityConfig {
         return http
                 .authorizeRequests()
                 .requestMatchers(patternMap.get("ADMIN")).hasRole("ADMIN")
-                .requestMatchers(patternMap.get("USER")).hasRole("ADMIN")
-                .requestMatchers(patternMap.get("EMPLOYEE")).hasRole("ADMIN")
-                .requestMatchers(patternMap.get("MANAGER")).hasRole("ADMIN")
+                .requestMatchers(patternMap.get("USER")).hasRole("USER")
+                .requestMatchers(patternMap.get("EMPLOYEE")).hasRole("EMPLOYEE")
+                .requestMatchers(patternMap.get("MANAGER")).hasRole("MANAGER")
                 .requestMatchers("/login").permitAll()
                 .and()
                 .csrf(AbstractHttpConfigurer::disable)
