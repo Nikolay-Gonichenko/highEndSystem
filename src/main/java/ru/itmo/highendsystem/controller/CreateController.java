@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.itmo.highendsystem.model.dto.partial.ShortAccountDto;
 import ru.itmo.highendsystem.model.dto.partial.ShortEmployeeDto;
+import ru.itmo.highendsystem.model.dto.partial.ShortFlightDto;
 import ru.itmo.highendsystem.service.business.CreateService;
 
 /**
@@ -40,5 +41,15 @@ public class CreateController {
     @PostMapping("account")
     public ResponseEntity<Long> createNewAccount(@RequestBody ShortAccountDto account) {
         return ResponseEntity.ok(createService.createAccount(account));
+    }
+
+    /**
+     * Создание нового полета
+     * @param flight краткое дто полета
+     * @return id полета
+     */
+    @PostMapping("flight")
+    public ResponseEntity<Long> createNewFlight(@RequestBody ShortFlightDto flight) {
+        return ResponseEntity.ok(createService.createFlight(flight));
     }
 }
