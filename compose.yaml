@@ -14,6 +14,9 @@ services:
   highEndSystem:
     image: highendsystem:latest
     container_name: highendsystem
+    environment:
+      - 'PAGINATION_MAX_SIZE=50'
+      - 'JWT_SECRET=itmo'
     build:
       context: .
       dockerfile: Dockerfile

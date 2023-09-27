@@ -5,13 +5,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import ru.itmo.highendsystem.exception.data.NotFoundEntityByIdException;
 import ru.itmo.highendsystem.mapper.FlightMapper;
 import ru.itmo.highendsystem.model.dto.full.FullFlightDto;
-import ru.itmo.highendsystem.model.dto.full.FullHumanDto;
 import ru.itmo.highendsystem.model.entity.Flight;
-import ru.itmo.highendsystem.model.entity.Human;
 import ru.itmo.highendsystem.repository.FlightRepository;
 
 import java.util.List;
@@ -65,12 +65,14 @@ public class FlightServiceImplTest {
         fullFlightDto1.setId(id1);
         FullFlightDto fullFlightDto2 = new FullFlightDto();
         fullFlightDto2.setId(id2);
+        List<Flight> flights = List.of(flight1, flight2);
+        PageRequest pageRequest = PageRequest.of(0, 2);
 
-        when(flightRepository.findAll()).thenReturn(List.of(flight1, flight2));
+        when(flightRepository.findAll(pageRequest)).thenReturn(new PageImpl<>(flights, pageRequest, flights.size()));
         when(flightMapper.flightToFullDto(flight1)).thenReturn(fullFlightDto1);
         when(flightMapper.flightToFullDto(flight2)).thenReturn(fullFlightDto2);
 
-        List<FullFlightDto> expected = flightService.getAllFlights();
+        List<FullFlightDto> expected = flightService.getAllFlights(0, 2);
         assertEquals(expected.size(), 2);
         assertEquals(expected.get(0).getId(), id1);
         assertEquals(expected.get(1).getId(), id2);

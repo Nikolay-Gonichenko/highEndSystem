@@ -32,17 +32,15 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public List<FullTicketDto> getAllTicketsByUserId(Long id) {
-        List<Ticket> tickets = ticketRepository.findAll();
+        List<Ticket> tickets = ticketRepository.findAllByHumanId(id);
         return tickets.stream()
-                .filter(x -> Objects.equals(x.getHuman().getId(), id))
                 .map(x -> ticketMapper.ticketToFullDto(x)).toList();
     }
 
     @Override
     public List<FullTicketDto> getAllTicketsByFlightId(Long id) {
-        List<Ticket> tickets = ticketRepository.findAll();
+        List<Ticket> tickets = ticketRepository.findAllByFlightId(id);
         return tickets.stream()
-                .filter(x -> Objects.equals(x.getFlight().getId(), id))
                 .map(x -> ticketMapper.ticketToFullDto(x)).toList();
     }
 

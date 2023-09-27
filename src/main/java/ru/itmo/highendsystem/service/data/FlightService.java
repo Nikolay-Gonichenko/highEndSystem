@@ -18,9 +18,11 @@ public interface FlightService {
 
     /**
      * Получение всех полетов
+     * @param offset номер страницы
+     * @param limit количество полётов на странице
      * @return список дто полетов
      */
-    List<FullFlightDto> getAllFlights();
+    List<FullFlightDto> getAllFlights(Integer offset, Integer limit);
 
     FullFlightDto saveFlight(FullFlightDto flight);
 }

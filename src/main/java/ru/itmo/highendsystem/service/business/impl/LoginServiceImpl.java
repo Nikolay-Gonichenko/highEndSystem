@@ -20,6 +20,8 @@ public class LoginServiceImpl implements LoginService {
     private AccountService accountService;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
 
 
     @Override
@@ -27,6 +29,6 @@ public class LoginServiceImpl implements LoginService {
         FullAccountDto fullAccountDto = accountService.getAccountByNickname(accountDtoForLogin.getNickname());
        if (fullAccountDto == null || !passwordEncoder.matches(accountDtoForLogin.getPassword(), fullAccountDto.getPassword()))
             throw new WrongCredentialsException(accountDtoForLogin);
-        return JwtTokenUtil.generateAccessToken(accountDtoForLogin.getNickname());
+        return jwtTokenUtil.generateAccessToken(accountDtoForLogin.getNickname());
     }
 }

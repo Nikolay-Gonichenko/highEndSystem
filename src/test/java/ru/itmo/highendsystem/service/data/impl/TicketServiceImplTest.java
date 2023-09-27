@@ -37,8 +37,6 @@ public class TicketServiceImplTest {
         human2.setId(user2Id);
         Ticket ticket1 = new Ticket();
         ticket1.setHuman(human1);
-        Ticket ticket2 = new Ticket();
-        ticket2.setHuman(human2);
         FullHumanDto fullHumanDto1 = new FullHumanDto();
         fullHumanDto1.setId(user1Id);
         FullHumanDto fullHumanDto2 = new FullHumanDto();
@@ -47,8 +45,8 @@ public class TicketServiceImplTest {
         fullTicketDto1.setHuman(fullHumanDto1);
         FullTicketDto fullTicketDto2 = new FullTicketDto();
         fullTicketDto2.setHuman(fullHumanDto2);
-        List<Ticket> allTickets = List.of(ticket1,ticket2);
-        when(ticketRepository.findAll()).thenReturn(allTickets);
+        List<Ticket> allTickets = List.of(ticket1);
+        when(ticketRepository.findAllByHumanId(user1Id)).thenReturn(allTickets);
         when(ticketMapper.ticketToFullDto(ticket1)).thenReturn(fullTicketDto1);
         List<FullTicketDto> expectedResult = ticketService.getAllTicketsByUserId(user1Id);
         assertEquals(expectedResult.size(), 1);

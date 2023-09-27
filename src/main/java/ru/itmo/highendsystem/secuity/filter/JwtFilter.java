@@ -22,12 +22,14 @@ public class JwtFilter extends GenericFilterBean {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         String token = getTokenFromRequest((HttpServletRequest) servletRequest);
-        if (token != null && JwtTokenUtil.validateToken(token)) {
-            String userLogin = JwtTokenUtil.getLoginFromToken(token);
+        if (token != null && jwtTokenUtil.validateToken(token)) {
+            String userLogin = jwtTokenUtil.getLoginFromToken(token);
             UserDetails account = userService.loadUserByUsername(userLogin);
             UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(account, null, account.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(auth);
