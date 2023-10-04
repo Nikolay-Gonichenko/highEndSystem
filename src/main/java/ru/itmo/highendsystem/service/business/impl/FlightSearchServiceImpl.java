@@ -24,7 +24,7 @@ public class FlightSearchServiceImpl implements FlightSearchService {
     @Autowired
     private FlightService flightService;
 
-    @Value("{pagination:maxSize}")
+    @Value("${pagination.maxSize}")
     private String maxPageSize;
 
     private LocalDate DateToLocalDate(Date date) {

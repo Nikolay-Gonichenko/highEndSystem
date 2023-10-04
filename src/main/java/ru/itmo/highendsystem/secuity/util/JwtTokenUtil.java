@@ -16,7 +16,7 @@ public class JwtTokenUtil {
      */
     private final int EXPIRE_DURATION = 60*60*1000;
 
-    @Value("${jwt:secret}")
+    @Value("${jwt.secret}")
     private String jwtSecret;
 
     public String generateAccessToken(String login) {

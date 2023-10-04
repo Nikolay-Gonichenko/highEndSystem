@@ -1,5 +1,6 @@
 package ru.itmo.highendsystem.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +27,7 @@ public class ViolationOperationController {
      * @return обновлённое число нарушений у пользователя
      */
     @PostMapping("add")
-    public ResponseEntity<Integer> addViolation(@RequestBody ShortViolationDto violationDto) {
+    public ResponseEntity<Integer> addViolation(@Valid @RequestBody ShortViolationDto violationDto) {
         return ResponseEntity.ok(violationOperationService.addViolation(violationDto));
     }
 
@@ -36,7 +37,7 @@ public class ViolationOperationController {
      * @return true если операция завершилась успешно
      */
     @PostMapping("ban")
-    public ResponseEntity<Boolean> ban(@RequestBody ShortBannedListDto shortBannedListDto) {
+    public ResponseEntity<Boolean> ban(@Valid @RequestBody ShortBannedListDto shortBannedListDto) {
         return ResponseEntity.ok(violationOperationService.ban(shortBannedListDto));
     }
 }

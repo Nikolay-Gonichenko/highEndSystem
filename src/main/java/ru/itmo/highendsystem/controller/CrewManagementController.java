@@ -1,5 +1,6 @@
 package ru.itmo.highendsystem.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +26,7 @@ public class CrewManagementController {
      * @return true если операция завершилась успешно
      */
     @PostMapping("add")
-    public ResponseEntity<Boolean> addEmployeeToFlight(@RequestBody ShortCrewDto crewDto) {
+    public ResponseEntity<Boolean> addEmployeeToFlight(@Valid @RequestBody ShortCrewDto crewDto) {
         return ResponseEntity.ok(crewManagementService.addEmployeeToFlight(crewDto));
     }
 }

@@ -1,5 +1,6 @@
 package ru.itmo.highendsystem.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class LoginController {
      * @return токен
      */
     @PostMapping("login")
-    public ResponseEntity<String> login(@RequestBody AccountDtoForLogin accountDtoForLogin) {
+    public ResponseEntity<String> login(@Valid @RequestBody AccountDtoForLogin accountDtoForLogin) {
         return ResponseEntity.ok(loginService.login(accountDtoForLogin));
     }
 }

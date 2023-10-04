@@ -1,6 +1,7 @@
 package ru.itmo.highendsystem.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,5 +34,6 @@ public class Employee {
     private Position position;
 
     @Column(name = "salary", nullable = false)
+    @Min(value = 0, message = "Зарплата не может быть меньше 0")
     private Integer salary;
 }

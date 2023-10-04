@@ -1,6 +1,7 @@
 package ru.itmo.highendsystem.controller;
 
 import jakarta.persistence.Access;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +30,7 @@ public class RecommendationController {
      * @return список маршрутов
      */
     @PostMapping("")
-    public ResponseEntity<List<FullRouteDto>> getRecommendations(@RequestBody FullRecommendationDto recommendationDto) {
+    public ResponseEntity<List<FullRouteDto>> getRecommendations(@Valid @RequestBody FullRecommendationDto recommendationDto) {
         return ResponseEntity.ok(recommendationService.getRecommendationsToUser(recommendationDto.getUserId(), recommendationDto.getCount()));
     }
 }

@@ -1,5 +1,6 @@
 package ru.itmo.highendsystem.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class FlightsController {
     private FlightSearchService flightSearchService;
 
     @PostMapping("all")
-    public ResponseEntity<List<FullFlightDto>> getFlights(@RequestBody FlightSearchDto search) {
+    public ResponseEntity<List<FullFlightDto>> getFlights(@Valid @RequestBody FlightSearchDto search) {
         return ResponseEntity.ok(flightSearchService.getFlightsByFilters(search));
     }
 }

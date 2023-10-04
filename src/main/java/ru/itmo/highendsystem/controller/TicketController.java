@@ -1,5 +1,6 @@
 package ru.itmo.highendsystem.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,12 +20,12 @@ public class TicketController {
     TicketOperationService ticketOperationService;
 
     @PostMapping("buy")
-    public ResponseEntity<Long> buyTicket(@RequestBody BuyingTicketDto buyingDto) {
+    public ResponseEntity<Long> buyTicket(@Valid @RequestBody BuyingTicketDto buyingDto) {
         return ResponseEntity.ok(ticketOperationService.buyTicket(buyingDto.humanId(), buyingDto.ticketDto()));
     }
 
     @PostMapping("cost")
-    public ResponseEntity<Integer> setCostOnTickets(@RequestBody SettingCostDto costDto) {
+    public ResponseEntity<Integer> setCostOnTickets(@Valid @RequestBody SettingCostDto costDto) {
         return ResponseEntity.ok(ticketOperationService.setCostOnTickets(costDto.flightId(), costDto.cost()));
     }
 }

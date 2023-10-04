@@ -1,6 +1,7 @@
 package ru.itmo.highendsystem.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,9 +28,13 @@ public class Account implements UserDetails {
     private Long id;
 
     @Column(name = "nickname", nullable = false)
+    @NotBlank(message = "Имя аккаунта не должно быть пустым")
+    @Size(max = 255, message = "Имя аккаунта не должно содержать более 255 символов")
     private String nickname;
 
     @Column(name = "password", nullable = false)
+    @NotBlank(message = "Пароль не должен быть пустым")
+    @Size(max = 255, message = "Пароль не должен содержать более 255 символов")
     private String password;
 
     @ManyToOne(cascade = {CascadeType.ALL})
@@ -37,12 +42,15 @@ public class Account implements UserDetails {
     private Human human;
 
     @Column(name = "bonus_money", nullable = false)
+    @Min(value = 0, message = "Количество бонусных миль не может быть меньше нуля")
     private Integer bonusMoney;
 
     @Column(name = "registration_date", nullable = false)
     private Date registrationDate;
 
     @Column(name = "violation_count", nullable = false)
+    @Min(value = 0, message = "Количество нарушений не может быть меньше нуля")
+    @Max(value = 3, message = "Количество нарушений не может быть больше 3")
     private Integer violationCount;
 
     @ManyToOne

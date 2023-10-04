@@ -1,6 +1,7 @@
 package ru.itmo.highendsystem.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,7 @@ public class Error {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "message")
+    @Column(name = "message", nullable = false)
     private String message;
 
     @ManyToOne
